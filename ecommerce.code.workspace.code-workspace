@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "ecommerce"
+		},
+		{
+			"name": "eureka",
+			"path": "eureka"
+		},
+		{
+			"path": "getway"
+		},
+		{
+			"path": "payment"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
