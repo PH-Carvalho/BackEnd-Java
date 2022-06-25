@@ -10,6 +10,10 @@ public enum FormaPagamento {
 
     String descicao;
 
+    private FormaPagamento(){
+        
+    }
+
     private FormaPagamento(String descricao){
 
         this.descicao=descricao;

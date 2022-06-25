@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.payment.payment.dto.PaymentDto;
+import com.payment.payment.dto.PaymentDtoWithProduct;
 import com.payment.payment.service.PaymentService;
 
 @RestController
@@ -28,20 +29,22 @@ public class PaymentController {
 
    @GetMapping
 
-   public List<PaymentDto> obterTododsOsPagamentos(){
+   public List<PaymentDto> obterTodosOsPagamentos(){
     return payment.obterTodosPagamentos();
    }
 
-   @GetMapping("/id")
-   public PaymentDto obterPorId(@PathVariable String id){
+   @GetMapping("/{id}")
+   public PaymentDtoWithProduct obterPorId(@PathVariable String id){
     
     return payment.obterPagamentoPorId(id);
     
    }
 
    @PostMapping
-   public ResponseEntity<PaymentDto> cadastrarProduto(@RequestBody @Valid PaymentDto produto){
-     return new ResponseEntity<>(payment.CadastrarPagamento(produto),HttpStatus.CREATED);
+   public ResponseEntity<PaymentDto> cadastrarPagamento(@RequestBody @Valid PaymentDto paymentDto){
+       return new ResponseEntity<>(payment.cadastrarPagamento(paymentDto), HttpStatus.CREATED);
+
+   } 
     
    }
 
@@ -49,4 +52,4 @@ public class PaymentController {
   
 
     
-}
+

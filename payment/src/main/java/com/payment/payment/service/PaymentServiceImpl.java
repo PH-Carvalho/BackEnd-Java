@@ -1,14 +1,15 @@
 package com.payment.payment.service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
-import java.util.stream.Collectors;
-
+import com.payment.payment.client.Produto;
+import com.payment.payment.client.ProdutoFeignClient;
 import com.payment.payment.dto.PaymentDto;
 import com.payment.payment.dto.PaymentDtoWithProduct;
 import com.payment.payment.model.Payment;
@@ -19,6 +20,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Autowired
     private PaymentRepository repository ;
+
+    @Autowired
+
+    private ProdutoFeignClient feignClient;
     
     private ModelMapper mapper = new ModelMapper();
 
@@ -27,14 +32,29 @@ public class PaymentServiceImpl implements PaymentService {
         Optional<Payment> paymentSearch = repository.findById(id);
         
         if(paymentSearch.isPresent()){
-            return mapper.map(paymentSearch, PaymentDtoWithProduct.class);
+
+           /* primeira forma: PaymentDtoWithProduct paymentWithDetails = mapper.map(paymentSearch, PaymentDtoWithProduct.class);
+            paymentWithDetails.setProdutoDetalhes(feignClient.obterProdutoPorId(paymentSearch.get().getIdProduto()));
+            return paymentWithDetails;*/
+
+            //Segunda Forma:
+
+            PaymentDtoWithProduct paymentWithDetails = mapper.map(paymentSearch.get(), PaymentDtoWithProduct.class);
+
+            //incluindo a chamada ao produto.
+
+            Produto produto = feignClient.obterProdutoPorId(paymentSearch.get().getIdProduto());
+            
+            paymentWithDetails.setProdutoDetalhes(produto);
+
+            return paymentWithDetails;
         }
 
         return null;
     }
 
     @Override
-    public PaymentDto CadastrarPagamento(PaymentDto Pagamento) {
+    public PaymentDto cadastrarPagamento(PaymentDto Pagamento) {
         
         Payment receberPagamento = mapper.map(Pagamento, Payment.class);
         repository.save(receberPagamento);
@@ -44,7 +64,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 
     @Override
-    public PaymentDto ProdutoComprado(String produtoComprado) {
+    public PaymentDto produtoComprado(String produtoComprado) {
         
         return null;
     }

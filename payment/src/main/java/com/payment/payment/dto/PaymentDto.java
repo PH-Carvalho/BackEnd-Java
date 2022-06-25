@@ -6,7 +6,7 @@ public class PaymentDto {
 
     private String id;
     private FormaPagamento formaPagamento;
-    private Double valorPagor;
+    private Double valorPago;
     private String idProduto;
     
     public String getId() {
@@ -21,11 +21,11 @@ public class PaymentDto {
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
-    public Double getValorPagor() {
-        return valorPagor;
+    public Double getValorPago() {
+        return valorPago;
     }
-    public void setValorPagor(Double valorPagor) {
-        this.valorPagor = valorPagor;
+    public void setValorPago(Double valorPago) {
+        this.valorPago = valorPago;
     }
     public String getIdProduto() {
         return idProduto;

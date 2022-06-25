@@ -8,8 +8,8 @@ import com.payment.payment.dto.PaymentDtoWithProduct;
 public interface PaymentService {
     
     public PaymentDtoWithProduct obterPagamentoPorId(String id);
-    public PaymentDto CadastrarPagamento(PaymentDto tipoDePagamento);
-    public PaymentDto ProdutoComprado(String produtoComprado);
+    public PaymentDto cadastrarPagamento(PaymentDto tipoDePagamento);
+    public PaymentDto produtoComprado(String produtoComprado);
     public List<PaymentDto> obterTodosPagamentos();
 
 }

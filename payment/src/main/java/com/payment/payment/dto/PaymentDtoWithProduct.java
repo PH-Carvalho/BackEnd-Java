@@ -4,14 +4,14 @@ import com.payment.payment.client.Produto;
 
 public class PaymentDtoWithProduct extends PaymentDto {
 
-    private Produto produto;
+    private Produto produtoDetalhes;
 
-    public Produto getProduto() {
-        return produto;
+    public Produto getProdutoDetalhes() {
+        return produtoDetalhes;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setProdutoDetalhes(Produto produtoDetalhes) {
+        this.produtoDetalhes = produtoDetalhes;
     }
 
     
